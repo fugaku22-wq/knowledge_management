@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr"><head><title>Reacってなに？</title><meta charset="utf-8"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="Quartz 4"/><meta property="og:title" content="Reacってなに？"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Reacってなに？"/><meta name="twitter:description" content="Reactってなに〜？ ……って、今さら聞いちゃうとか、だっさ♡ でもまあ♡ あたしが「Reactってなんぞや」ってやつを、一発で理解できる脳内セミナー開いてやんよ♡ 集中しなきゃおいてくぞ〜？ざぁ～こ♡ 💥 一言で言うと？ React（リアクト）＝ UIを作るためのJavaScriptライブラリ♡ 🎀 もうちょいちゃんと言うと… WebアプリやWebページの“見た目（View）”をパーツ化して、サクサク動くようにする仕組み♡ 🎨 イメージして！ HTMLでボタンとか見た目つくるの、めんどくさくない？ JSで動きつけるのも、グチャグチャになって管理む〜り〜！ そこで出てくるのが、Reac..."/><meta property="og:description" content="Reactってなに〜？ ……って、今さら聞いちゃうとか、だっさ♡ でもまあ♡ あたしが「Reactってなんぞや」ってやつを、一発で理解できる脳内セミナー開いてやんよ♡ 集中しなきゃおいてくぞ〜？ざぁ～こ♡ 💥 一言で言うと？ React（リアクト）＝ UIを作るためのJavaScriptライブラリ♡ 🎀 もうちょいちゃんと言うと… WebアプリやWebページの“見た目（View）”をパーツ化して、サクサク動くようにする仕組み♡ 🎨 イメージして！ HTMLでボタンとか見た目つくるの、めんどくさくない？ JSで動きつけるのも、グチャグチャになって管理む〜り〜！ そこで出てくるのが、Reac..."/><meta property="og:image:alt" content="Reactってなに〜？ ……って、今さら聞いちゃうとか、だっさ♡ でもまあ♡ あたしが「Reactってなんぞや」ってやつを、一発で理解できる脳内セミナー開いてやんよ♡ 集中しなきゃおいてくぞ〜？ざぁ～こ♡ 💥 一言で言うと？ React（リアクト）＝ UIを作るためのJavaScriptライブラリ♡ 🎀 もうちょいちゃんと言うと… WebアプリやWebページの“見た目（View）”をパーツ化して、サクサク動くようにする仕組み♡ 🎨 イメージして！ HTMLでボタンとか見た目つくるの、めんどくさくない？ JSで動きつけるのも、グチャグチャになって管理む〜り〜！ そこで出てくるのが、Reac..."/><meta property="twitter:domain" content="quartz.jzhao.xyz"/><meta property="og:url" content="https://quartz.jzhao.xyz/サイト構築/Reacってなに？"/><meta property="twitter:url" content="https://quartz.jzhao.xyz/サイト構築/Reacってなに？"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="Reactってなに〜？ ……って、今さら聞いちゃうとか、だっさ♡ でもまあ♡ あたしが「Reactってなんぞや」ってやつを、一発で理解できる脳内セミナー開いてやんよ♡ 集中しなきゃおいてくぞ〜？ざぁ～こ♡ 💥 一言で言うと？ React（リアクト）＝ UIを作るためのJavaScriptライブラリ♡ 🎀 もうちょいちゃんと言うと… WebアプリやWebページの“見た目（View）”をパーツ化して、サクサク動くようにする仕組み♡ 🎨 イメージして！ HTMLでボタンとか見た目つくるの、めんどくさくない？ JSで動きつけるのも、グチャグチャになって管理む〜り〜！ そこで出てくるのが、Reac..."/><meta name="generator" content="Quartz"/><link href="../index.css" rel="stylesheet" type="text/css" spa-preserve/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  padding: 2rem;
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiQzpcXFVzZXJzXFxhaXVcXOODl+ODreOCuOOCp+OCr+ODiOeuoeeQhlxccXVhcnR6LTRcXHF1YXJ0elxcY29tcG9uZW50c1xcc3R5bGVzIiwic291cmNlcyI6WyJtZXJtYWlkLmlubGluZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFHRjtFQUNFOzs7QUFLRjtFQUNFO0VBQ0E7OztBQUlKO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFOztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7O0FBR0Y7RUFDRTtFQUNBOztBQUlKO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTs7QUFHRjtFQUNFOztBQUlGO0VBQ0U7RUFDQTtFQUNBIiwic291cmNlc0NvbnRlbnQiOlsiLmV4cGFuZC1idXR0b24ge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsb2F0OiByaWdodDtcbiAgcGFkZGluZzogMC40cmVtO1xuICBtYXJnaW46IDAuM3JlbTtcbiAgcmlnaHQ6IDA7IC8vIE5PVEU6IHJpZ2h0IHdpbGwgYmUgc2V0IGluIG1lcm1haWQuaW5saW5lLnRzXG4gIGNvbG9yOiB2YXIoLS1ncmF5KTtcbiAgYm9yZGVyLWNvbG9yOiB2YXIoLS1kYXJrKTtcbiAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tbGlnaHQpO1xuICBib3JkZXI6IDFweCBzb2xpZDtcbiAgYm9yZGVyLXJhZGl1czogNXB4O1xuICBvcGFjaXR5OiAwO1xuICB0cmFuc2l0aW9uOiAwLjJzO1xuXG4gICYgPiBzdmcge1xuICAgIGZpbGw6IHZhcigtLWxpZ2h0KTtcbiAgICBmaWx0ZXI6IGNvbnRyYXN0KDAuMyk7XG4gIH1cblxuICAmOmhvdmVyIHtcbiAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgYm9yZGVyLWNvbG9yOiB2YXIoLS1zZWNvbmRhcnkpO1xuICB9XG5cbiAgJjpmb2N1cyB7XG4gICAgb3V0bGluZTogMDtcbiAgfVxufVxuXG5wcmUge1xuICAmOmhvdmVyID4gLmV4cGFuZC1idXR0b24ge1xuICAgIG9wYWNpdHk6IDE7XG4gICAgdHJhbnNpdGlvbjogMC4ycztcbiAgfVxufVxuXG4jbWVybWFpZC1jb250YWluZXIge1xuICBwb3NpdGlvbjogZml4ZWQ7XG4gIGNvbnRhaW46IGxheW91dDtcbiAgei1pbmRleDogOTk5O1xuICBsZWZ0OiAwO1xuICB0b3A6IDA7XG4gIHdpZHRoOiAxMDB2dztcbiAgaGVpZ2h0OiAxMDB2aDtcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcbiAgZGlzcGxheTogbm9uZTtcbiAgYmFja2Ryb3AtZmlsdGVyOiBibHVyKDRweCk7XG4gIGJhY2tncm91bmQ6IHJnYmEoMCwgMCwgMCwgMC41KTtcblxuICAmLmFjdGl2ZSB7XG4gICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xuICB9XG5cbiAgJiA+ICNtZXJtYWlkLXNwYWNlIHtcbiAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWxpZ2h0KTtcbiAgICBib3JkZXItcmFkaXVzOiA1cHg7XG4gICAgcG9zaXRpb246IGZpeGVkO1xuICAgIHRvcDogNTAlO1xuICAgIGxlZnQ6IDUwJTtcbiAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZSgtNTAlLCAtNTAlKTtcbiAgICBoZWlnaHQ6IDgwdmg7XG4gICAgd2lkdGg6IDgwdnc7XG4gICAgb3ZlcmZsb3c6IGhpZGRlbjtcblxuICAgICYgPiAubWVybWFpZC1jb250ZW50IHtcbiAgICAgIHBhZGRpbmc6IDJyZW07XG4gICAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgICB0cmFuc2Zvcm0tb3JpZ2luOiAwIDA7XG4gICAgICB0cmFuc2l0aW9uOiB0cmFuc2Zvcm0gMC4xcyBlYXNlO1xuICAgICAgb3ZlcmZsb3c6IHZpc2libGU7XG4gICAgICBtaW4taGVpZ2h0OiAyMDBweDtcbiAgICAgIG1pbi13aWR0aDogMjAwcHg7XG5cbiAgICAgIHByZSB7XG4gICAgICAgIG1hcmdpbjogMDtcbiAgICAgICAgYm9yZGVyOiBub25lO1xuICAgICAgfVxuXG4gICAgICBzdmcge1xuICAgICAgICBtYXgtd2lkdGg6IG5vbmU7XG4gICAgICAgIGhlaWdodDogYXV0bztcbiAgICAgIH1cbiAgICB9XG5cbiAgICAmID4gLm1lcm1haWQtY29udHJvbHMge1xuICAgICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgICAgYm90dG9tOiAyMHB4O1xuICAgICAgcmlnaHQ6IDIwcHg7XG4gICAgICBkaXNwbGF5OiBmbGV4O1xuICAgICAgZ2FwOiA4cHg7XG4gICAgICBwYWRkaW5nOiA4cHg7XG4gICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodCk7XG4gICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgYm9yZGVyLXJhZGl1czogNnB4O1xuICAgICAgYm94LXNoYWRvdzogMCAycHggNHB4IHJnYmEoMCwgMCwgMCwgMC4xKTtcbiAgICAgIHotaW5kZXg6IDI7XG5cbiAgICAgIC5tZXJtYWlkLWNvbnRyb2wtYnV0dG9uIHtcbiAgICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgICAgICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gICAgICAgIHdpZHRoOiAzMnB4O1xuICAgICAgICBoZWlnaHQ6IDMycHg7XG4gICAgICAgIHBhZGRpbmc6IDA7XG4gICAgICAgIGJvcmRlcjogMXB4IHNvbGlkIHZhcigtLWxpZ2h0Z3JheSk7XG4gICAgICAgIGJhY2tncm91bmQ6IHZhcigtLWxpZ2h0KTtcbiAgICAgICAgY29sb3I6IHZhcigtLWRhcmspO1xuICAgICAgICBib3JkZXItcmFkaXVzOiA0cHg7XG4gICAgICAgIGN1cnNvcjogcG9pbnRlcjtcbiAgICAgICAgZm9udC1zaXplOiAxNnB4O1xuICAgICAgICBmb250LWZhbWlseTogdmFyKC0tYm9keUZvbnQpO1xuICAgICAgICB0cmFuc2l0aW9uOiBhbGwgMC4ycyBlYXNlO1xuXG4gICAgICAgICY6aG92ZXIge1xuICAgICAgICAgIGJhY2tncm91bmQ6IHZhcigtLWxpZ2h0Z3JheSk7XG4gICAgICAgIH1cblxuICAgICAgICAmOmFjdGl2ZSB7XG4gICAgICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGVZKDFweCk7XG4gICAgICAgIH1cblxuICAgICAgICAvLyBTdHlsZSB0aGUgcmVzZXQgYnV0dG9uIGRpZmZlcmVudGx5XG4gICAgICAgICY6bnRoLWNoaWxkKDIpIHtcbiAgICAgICAgICB3aWR0aDogYXV0bztcbiAgICAgICAgICBwYWRkaW5nOiAwIDEycHg7XG4gICAgICAgICAgZm9udC1zaXplOiAxNHB4O1xuICAgICAgICB9XG4gICAgICB9XG4gICAgfVxuICB9XG59XG4iXX0= */</style><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" spa-preserve/><script src="../prescript.js" type="application/javascript" spa-preserve></script><script type="application/javascript" spa-preserve>const fetchData = fetch("../static/contentIndex.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://quartz.jzhao.xyz/index.xml"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://quartz.jzhao.xyz/サイト構築/Reacってなに？-og-image.webp"/><meta property="og:image:url" content="https://quartz.jzhao.xyz/サイト構築/Reacってなに？-og-image.webp"/><meta name="twitter:image" content="https://quartz.jzhao.xyz/サイト構築/Reacってなに？-og-image.webp"/><meta property="og:image:type" content="image/.webp"/></head><body data-slug="サイト構築/Reacってなに？"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">Quartz 4</a></h2><div class="spacer mobile-only"></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 1rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>Search</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Search for something" placeholder="Search for something"/><div class="search-layout" data-preview="true"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Dark mode"><title>Dark mode</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Light mode"><title>Light mode</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="Reader mode"><title>Reader mode</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a,b)=>!a.isFolder&amp;&amp;!b.isFolder||a.isFolder&amp;&amp;b.isFolder?a.displayName.localeCompare(b.displayName,void 0,{numeric:!0,sensitivity:\&quot;base\&quot;}):!a.isFolder&amp;&amp;b.isFolder?1:-1&quot;,&quot;filterFn&quot;:&quot;node=>node.slugSegment!==\&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;node=>node&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-43"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>Explorer</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-43" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#"></a></li></template><template id="template-folder"><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../サイト構築/">サイト構築</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Reacってなに？</a></div></nav><h1 class="article-title">Reacってなに？</h1><p show-comma="true" class="content-meta"><time datetime="2025-11-02T12:13:22.872Z">Nov 02, 2025</time><span>12 min read</span></p></div></div><article class="popover-hint"><p>Reactってなに〜？<br/>
+……って、今さら聞いちゃうとか、だっさ♡<br/>
+でもまあ♡ あたしが「Reactってなんぞや」ってやつを、<strong>一発で理解できる脳内セミナー</strong>開いてやんよ♡<br/>
+集中しなきゃおいてくぞ〜？ざぁ～こ♡</p>
+<hr/>
+<h1 id="-一言で言うと">💥 一言で言うと？<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-一言で言うと" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<blockquote>
+<p><strong>React（リアクト）＝ UIを作るためのJavaScriptライブラリ♡</strong></p>
+</blockquote>
+<hr/>
+<h2 id="-もうちょいちゃんと言うと">🎀 もうちょいちゃんと言うと…<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-もうちょいちゃんと言うと" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<blockquote>
+<p><strong>WebアプリやWebページの“見た目（View）”をパーツ化して、サクサク動くようにする仕組み♡</strong></p>
+</blockquote>
+<hr/>
+<h2 id="-イメージして">🎨 イメージして！<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-イメージして" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>
+<p>HTMLでボタンとか見た目つくるの、めんどくさくない？</p>
+</li>
+<li>
+<p>JSで動きつけるのも、グチャグチャになって管理む〜り〜！</p>
+</li>
+<li>
+<p>そこで出てくるのが、<strong>React様♡</strong></p>
+</li>
+</ul>
+<p>→ 見た目を**「コンポーネント」って部品に分けて作れる**ようになるの！</p>
+<hr/>
+<h2 id="-例reactの超シンプルなボタン">🧱 例：Reactの超シンプルなボタン<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-例reactの超シンプルなボタン" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><code>function LikeButton() {   const [liked, setLiked] = useState(false)    return (     &lt;button onClick={() => setLiked(!liked)}>       {liked ? &quot;だいすき♡&quot; : &quot;ぽちって♡&quot;}     &lt;/button>   ) }</code></p>
+<p>↑ この1個で、「状態が変わるボタン」が完成♡<br/>
+HTML＋JS＋状態管理ぜんぶ<strong>コンポーネントの中で完結</strong>するのが強すぎ♡</p>
+<hr/>
+<h2 id="-reactのキホン要素">🧠 Reactのキホン要素<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-reactのキホン要素" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>要素</th><th>説明</th></tr></thead><tbody><tr><td><strong>コンポーネント</strong></td><td>UIのパーツ。<code>function MyComponent() {}</code> で定義</td></tr><tr><td><strong>JSX</strong></td><td>JSの中にHTMLっぽいタグ書ける魔法文法♡</td></tr><tr><td><strong>Props</strong></td><td>親→子に渡すデータ（部品の材料）</td></tr><tr><td><strong>State</strong></td><td>そのコンポーネントの「今の状態」</td></tr><tr><td><strong>Hooks</strong></td><td><code>useState()</code> など、Reactの便利機能！</td></tr></tbody></table></div>
+<hr/>
+<h2 id="-reactのつよつよポイント">📦 Reactのつよつよポイント<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-reactのつよつよポイント" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>ポイント</th><th>ざっくり内容</th></tr></thead><tbody><tr><td>✅ コンポーネント式UI</td><td>再利用・管理が超ラク♡</td></tr><tr><td>✅ 状態管理が楽ちん</td><td><code>useState()</code> でカンタンに状態操作</td></tr><tr><td>✅ 仮想DOMで爆速表示</td><td>実際のDOMじゃなく、仮想DOMで最適な変更だけ反映！無駄がない！</td></tr><tr><td>✅ エコシステム最強</td><td>Next.js, Redux, React Router…仲間いっぱい♡</td></tr></tbody></table></div>
+<hr/>
+<h2 id="-注意点もあるよ">🚨 注意点もあるよ♡<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-注意点もあるよ" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>ザコ落としポイント</th><th>理由</th></tr></thead><tbody><tr><td>JSX最初意味不明</td><td>HTMLなの？JSなの？って混乱する</td></tr><tr><td><code>useEffect()</code>沼</td><td>依存配列と再レンダリングの闇♡</td></tr><tr><td>学ぶこと多い</td><td>コンポーネント、フック、ライブラリ…けっこう多いよ♡</td></tr></tbody></table></div>
+<hr/>
+<h2 id="-reactって何で作られてる">🎯 Reactって何で作られてる？<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-reactって何で作られてる" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>名前</th><th>内容</th></tr></thead><tbody><tr><td>React本体</td><td>UIのコア機能（コンポーネントとか）</td></tr><tr><td>ReactDOM</td><td>ReactをWebに表示するための橋渡し</td></tr><tr><td>Babel</td><td>JSX → JS に変換するやつ</td></tr><tr><td>Webpack or Vite</td><td>まとめてビルド・最適化するやつ</td></tr></tbody></table></div>
+<hr/>
+<h2 id="-まとめ">🔥 まとめ！<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-まとめ" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>項目</th><th>内容</th></tr></thead><tbody><tr><td>名前</td><td>React（リアクト）</td></tr><tr><td>正体</td><td>UIライブラリ（JSベース）</td></tr><tr><td>特徴</td><td>コンポーネント化・状態管理・爆速描画</td></tr><tr><td>推しポイント</td><td>見た目＋動きがキレイに整理できる♡</td></tr><tr><td>あたしの評価</td><td>覚えたら無双できる♡ UI界の王♡</td></tr></tbody></table></div>
+<hr/>
+<h2 id="-最後に">💬 最後に♡<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-最後に" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<blockquote>
+<p><strong>「動く、キレイ、管理ラク」全部欲しい♡</strong><br/>
+そんなあんたにぴったりなのがReactちゃんなのよ〜？<br/>
+めっちゃ強いけど、<strong>最初でつまずくと一生沼る</strong>から、あたしと一緒にステップ踏んでこ？ふふっ♡</p>
+</blockquote>
+<p>次は？<br/>
+「ReactとVueの違い」とか「useEffectってなに」とか「Next.jsとは？」とか、どんどんイッちゃう？♡<br/>
+ざぁ～こ♡って言われる前に先手とってきな〜♡</p>
+<p>UIライブラリってなに？</p>
+<h6 id="chatgpt">ChatGPT:<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#chatgpt" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h6>
+<p>うふふ♡ 「UIライブラリってなに？」って〜？<br/>
+ふ〜んふ〜ん、まだそこ知らなかったの〜？<br/>
+じゃあこのあたしが、<strong>ざぁ～こ♡な混乱を秒で消し飛ばす解説</strong>してあげちゃおっか♡<br/>
+耳かっぽじってよく聞いてな〜？</p>
+<hr/>
+<h1 id="-uiライブラリとは">💡 UIライブラリとは？<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-uiライブラリとは" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<blockquote>
+<p><strong>UI（ユーザーインターフェース）を作るためのパーツや道具がまとめて入ってるセット♡</strong></p>
+</blockquote>
+<p>「UI＝画面に見えるボタン、フォーム、メニュー、ナビゲーション」とかのことね！</p>
+<p>そのUIを作るための<strong>便利パーツをいっぱい用意してくれてるツール群</strong>が、UIライブラリ！</p>
+<hr/>
+<h2 id="-イメージで言うと">🎨 イメージで言うと…<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-イメージで言うと" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<blockquote>
+<p>HTMLとCSSだけで、ボタンとかナビとか1個ずつ手作りしてたら大変すぎ〜！<br/>
+だから！<br/>
+<strong>UIライブラリは「もう完成してる部品の山」♡</strong><br/>
+それを<strong>ポンッて置くだけで可愛く・動くUIが手に入る</strong>ってワケ♡</p>
+</blockquote>
+<hr/>
+<h1 id="-uiライブラリを使うとどうなる">🧱 UIライブラリを使うとどうなる？<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-uiライブラリを使うとどうなる" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h3 id="before使わない時">Before（使わない時）：<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#before使わない時" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><code>&lt;button class=&quot;bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded&quot;>   おして♡ &lt;/button></code></p>
+<p>CSS地獄〜！</p>
+<hr/>
+<h3 id="afteruiライブラリあり">After（UIライブラリあり）：<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#afteruiライブラリあり" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><code>&lt;Button variant=&quot;primary&quot;>おして♡&lt;/Button></code></p>
+<p>↑ これだけで同じボタン完成♡　つよすぎ！</p>
+<hr/>
+<h2 id="-どんなuiライブラリがあるの">🧠 どんなUIライブラリがあるの？<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-どんなuiライブラリがあるの" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>名前</th><th>特徴</th></tr></thead><tbody><tr><td><strong>Material UI（MUI）</strong></td><td>Googleっぽいデザイン。React向け！</td></tr><tr><td><strong>Chakra UI</strong></td><td>優しい見た目。直感的に書ける。超人気♡</td></tr><tr><td><strong>Tailwind UI / ShadCN</strong></td><td>Tailwind CSSベースでカスタム性つよつよ！</td></tr><tr><td><strong>Bootstrap</strong></td><td>古参の王道。クラスつけるだけ！</td></tr><tr><td><strong>Ant Design</strong></td><td>ビジネス感強め。中国系サービスによく使われる！</td></tr></tbody></table></div>
+<hr/>
+<h2 id="-uiライブラリの中身ってなに">📦 UIライブラリの中身ってなに？<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-uiライブラリの中身ってなに" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>パーツ名</th><th>説明</th></tr></thead><tbody><tr><td><code>Button</code></td><td>ボタン</td></tr><tr><td><code>Modal</code></td><td>ポップアップ</td></tr><tr><td><code>Card</code></td><td>情報をまとめる四角いやつ</td></tr><tr><td><code>Tooltip</code></td><td>ホバーしたら説明出るやつ</td></tr><tr><td><code>Input</code></td><td>入力欄（フォーム）</td></tr><tr><td><code>Grid / Flex</code></td><td>レイアウト整えるやつ</td></tr></tbody></table></div>
+<hr/>
+<h2 id="-メリットまとめ">💥 メリットまとめ<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-メリットまとめ" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>メリット</th><th>内容</th></tr></thead><tbody><tr><td>✅ 開発爆速</td><td>一からCSS書かなくてOK♡</td></tr><tr><td>✅ デザイン統一</td><td>UIに統一感出る！だっさくならない！</td></tr><tr><td>✅ 時短</td><td>頭使わずポン置きで完了♡</td></tr><tr><td>✅ 保守ラク</td><td>デザイン変更も1か所で管理できること多い</td></tr></tbody></table></div>
+<hr/>
+<h2 id="-デメリットもあるよ">🧨 デメリットもあるよ〜♡<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-デメリットもあるよ" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>デメリット</th><th>内容</th></tr></thead><tbody><tr><td>❌ 自由度に限界</td><td>ガチカスタムには向かない場合もある</td></tr><tr><td>❌ サイズでかい</td><td>軽量性が必要な場面では注意</td></tr><tr><td>❌ フルオリジナルにはならない</td><td>見た目が”ライブラリっぽくなる”こともある</td></tr></tbody></table></div>
+<hr/>
+<h2 id="-uiライブラリどんなときに使う">🎯 UIライブラリ＝どんなときに使う？<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-uiライブラリどんなときに使う" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>
+<p>💼 プロジェクトを<strong>爆速で立ち上げたいとき</strong></p>
+</li>
+<li>
+<p>🧪 プロトタイプを<strong>すぐ形にしたいとき</strong></p>
+</li>
+<li>
+<p>🧠 複数人で開発して<strong>見た目の統一感を保ちたいとき</strong></p>
+</li>
+</ul>
+<hr/>
+<h2 id="-じゃあreactuiライブラリって最強じゃん">🥇 じゃあ<strong>React＋UIライブラリ</strong>って最強じゃん？<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-じゃあreactuiライブラリって最強じゃん" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>→ そのとおり♡<br/>
+<strong>Reactでコンポーネントを組む → UIライブラリで見た目ポン置き</strong><br/>
+これ、<strong>最強♡</strong></p>
+<hr/>
+<h2 id="-まとめ-1">💬 まとめ<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-まとめ-1" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>項目</th><th>内容</th></tr></thead><tbody><tr><td>UIライブラリとは？</td><td>UIパーツをまとめた便利セット♡</td></tr><tr><td>どんなもの？</td><td>ボタン・モーダル・フォーム・カード…</td></tr><tr><td>何がいい？</td><td>爆速・綺麗・統一・だっさくならない♡</td></tr><tr><td>代表例</td><td>MUI, Chakra UI, Tailwind UI, Bootstrap</td></tr></tbody></table></div>
+<hr/>
+<h2 id="最後に">最後に♡<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#最後に" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<blockquote>
+<p>自作でボタン作って一晩かけて「まあまあかな…」ってなるくらいなら、<br/>
+UIライブラリでポチッと置いて「はい爆速神UI♡」にしよ〜よ♡<br/>
+あんたの時間は貴重なんでしょ〜？ふふっ♡　イっちゃえ♡</p>
+</blockquote>
+<p>使ってみたいUIライブラリあったら、オススメも紹介するよ♡<br/>
+React前提？Tailwind前提？言ってごらん♡</p>
+<p>コンポーネントとなにがちがうの？</p>
+<h6 id="chatgpt-1">ChatGPT:<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#chatgpt-1" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h6>
+<p>うっわ〜♡ いいとこ突いてきたじゃ〜ん？<br/>
+<strong>「UIライブラリとコンポーネントって何が違うの〜？」<strong>って、もうそこで混ざってたら一生地獄だよ？<br/>
+でもあたしがここで</strong>ビシッと線引きしてあげる♡</strong><br/>
+しっかり理解して、ざぁ～こ♡卒業しよっか？</p>
+<hr/>
+<h1 id="-結論から言うよ">💥 結論から言うよ？<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-結論から言うよ" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<blockquote>
+<p><strong>「コンポーネント」は</strong>：UIの<strong>部品そのもの</strong><br/>
+<strong>「UIライブラリ」は</strong>：その部品を<strong>たくさん集めた道具箱（ライブラリ）</strong></p>
+</blockquote>
+<hr/>
+<h2 id="-たとえ話で爆速理解">🍱 たとえ話で爆速理解！<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-たとえ話で爆速理解" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="-コンポーネント--お寿司の1カン">🍣 コンポーネント → <strong>お寿司の1カン</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-コンポーネント--お寿司の1カン" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<blockquote>
+<p>たとえば、サーモン1個、たまご1個、それぞれが1個1個の「部品」</p>
+</blockquote>
+<h3 id="-uiライブラリ--寿司盛り合わせセット">🍱 UIライブラリ → <strong>寿司盛り合わせセット</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-uiライブラリ--寿司盛り合わせセット" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<blockquote>
+<p>サーモンもたまごも、ぜ〜んぶ詰め合わせたセット♡<br/>
+すでに完成したネタがそろってて、あとはポンポン並べるだけ！</p>
+</blockquote>
+<hr/>
+<h1 id="-ちゃんとした定義で比べてみよ">🧠 ちゃんとした定義で比べてみよ〜？<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-ちゃんとした定義で比べてみよ" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>比較項目</th><th>コンポーネント</th><th>UIライブラリ</th></tr></thead><tbody><tr><td>正体</td><td>UIの<strong>部品</strong>（1個1個のパーツ）</td><td>UIパーツの<strong>詰め合わせセット</strong></td></tr><tr><td>作る側</td><td>自分で手作りできる（Reactなどで）</td><td>他人が作ってくれたやつを使う</td></tr><tr><td>規模感</td><td>小さい（ボタン1個とか）</td><td>デカい（100個のパーツ含むとか）</td></tr><tr><td>使い方</td><td><code>&lt;MyButton /></code> みたいに書く</td><td><code>&lt;Button /></code> みたいに既製品呼び出す</td></tr><tr><td>カスタム性</td><td>自由自在にできる！</td><td>規格に沿ってカスタムする感じ</td></tr><tr><td>依存</td><td>自作なら依存なし♡</td><td>ライブラリのルールに依存あり！</td></tr></tbody></table></div>
+<hr/>
+<h2 id="-例で体感しよ">🧪 例で体感しよ？<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-例で体感しよ" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="-自作コンポーネント">🛠 自作コンポーネント：<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-自作コンポーネント" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><code>function MyButton() {   return &lt;button className=&quot;bg-pink-500&quot;>ぽち♡&lt;/button> }</code></p>
+<p>→ これは<strong>自分で定義した1個のコンポーネント</strong></p>
+<hr/>
+<h3 id="-uiライブラリから使う">📦 UIライブラリから使う：<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-uiライブラリから使う" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><code>import { Button } from &quot;@mui/material&quot;  &lt;Button variant=&quot;contained&quot;>ぽち♡&lt;/Button></code></p>
+<p>→ これは<strong>MUIというライブラリから呼び出した既製コンポーネント</strong></p>
+<hr/>
+<h2 id="-react的にまとめると">🧱 React的にまとめると…<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-react的にまとめると" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>
+<p>Reactでは、<strong>自分で「コンポーネント」を作るのが基本</strong></p>
+</li>
+<li>
+<p>でも、全部ゼロから作るのはしんどいから、</p>
+</li>
+<li>
+<p><strong>UIライブラリが「すでに作られたコンポーネント群」を提供してくれる♡</strong></p>
+</li>
+</ul>
+<hr/>
+<h2 id="-まとめ-2">💥 まとめ！<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-まとめ-2" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>用語</th><th>意味</th><th>たとえ</th></tr></thead><tbody><tr><td>コンポーネント</td><td>UIの最小単位（部品）</td><td>サーモン1カン</td></tr><tr><td>UIライブラリ</td><td>UIコンポーネントの詰め合わせセット</td><td>寿司盛り</td></tr></tbody></table></div>
+<hr/>
+<h2 id="-最後に-1">💬 最後に♡<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-最後に-1" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<blockquote>
+<p>UIライブラリに頼るのは時短のプロ♡<br/>
+コンポーネントを自作できるのは設計の鬼♡<br/>
+両方使いこなせたら……<strong>UI界の覇王♡</strong><br/>
+あんたも、そろそろ“置くだけ”じゃなく“作る側”になっちゃう〜？ふふっ♡</p>
+</blockquote>
+<p>「UIライブラリの中身カスタムしたいんだけど」とか「どっち選べばいいの」ってとこまで行けたら、あんたも一皮むけるよ♡<br/>
+続きイっちゃう？♡</p></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>Graph View</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc desktop-only"><button type="button" class="toc-header" aria-controls="toc-12" aria-expanded="true"><h3>Table of Contents</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-1" class="toc-content overflow"><li class="depth-0"><a href="#-一言で言うと" data-for="-一言で言うと">💥 一言で言うと？</a></li><li class="depth-1"><a href="#-もうちょいちゃんと言うと" data-for="-もうちょいちゃんと言うと">🎀 もうちょいちゃんと言うと…</a></li><li class="depth-1"><a href="#-イメージして" data-for="-イメージして">🎨 イメージして！</a></li><li class="depth-1"><a href="#-例reactの超シンプルなボタン" data-for="-例reactの超シンプルなボタン">🧱 例：Reactの超シンプルなボタン</a></li><li class="depth-1"><a href="#-reactのキホン要素" data-for="-reactのキホン要素">🧠 Reactのキホン要素</a></li><li class="depth-1"><a href="#-reactのつよつよポイント" data-for="-reactのつよつよポイント">📦 Reactのつよつよポイント</a></li><li class="depth-1"><a href="#-注意点もあるよ" data-for="-注意点もあるよ">🚨 注意点もあるよ♡</a></li><li class="depth-1"><a href="#-reactって何で作られてる" data-for="-reactって何で作られてる">🎯 Reactって何で作られてる？</a></li><li class="depth-1"><a href="#-まとめ" data-for="-まとめ">🔥 まとめ！</a></li><li class="depth-1"><a href="#-最後に" data-for="-最後に">💬 最後に♡</a></li><li class="depth-0"><a href="#-uiライブラリとは" data-for="-uiライブラリとは">💡 UIライブラリとは？</a></li><li class="depth-1"><a href="#-イメージで言うと" data-for="-イメージで言うと">🎨 イメージで言うと…</a></li><li class="depth-0"><a href="#-uiライブラリを使うとどうなる" data-for="-uiライブラリを使うとどうなる">🧱 UIライブラリを使うとどうなる？</a></li><li class="depth-2"><a href="#before使わない時" data-for="before使わない時">Before（使わない時）：</a></li><li class="depth-2"><a href="#afteruiライブラリあり" data-for="afteruiライブラリあり">After（UIライブラリあり）：</a></li><li class="depth-1"><a href="#-どんなuiライブラリがあるの" data-for="-どんなuiライブラリがあるの">🧠 どんなUIライブラリがあるの？</a></li><li class="depth-1"><a href="#-uiライブラリの中身ってなに" data-for="-uiライブラリの中身ってなに">📦 UIライブラリの中身ってなに？</a></li><li class="depth-1"><a href="#-メリットまとめ" data-for="-メリットまとめ">💥 メリットまとめ</a></li><li class="depth-1"><a href="#-デメリットもあるよ" data-for="-デメリットもあるよ">🧨 デメリットもあるよ〜♡</a></li><li class="depth-1"><a href="#-uiライブラリどんなときに使う" data-for="-uiライブラリどんなときに使う">🎯 UIライブラリ＝どんなときに使う？</a></li><li class="depth-1"><a href="#-じゃあreactuiライブラリって最強じゃん" data-for="-じゃあreactuiライブラリって最強じゃん">🥇 じゃあReact＋UIライブラリって最強じゃん？</a></li><li class="depth-1"><a href="#-まとめ-1" data-for="-まとめ-1">💬 まとめ</a></li><li class="depth-1"><a href="#最後に" data-for="最後に">最後に♡</a></li><li class="depth-0"><a href="#-結論から言うよ" data-for="-結論から言うよ">💥 結論から言うよ？</a></li><li class="depth-1"><a href="#-たとえ話で爆速理解" data-for="-たとえ話で爆速理解">🍱 たとえ話で爆速理解！</a></li><li class="depth-2"><a href="#-コンポーネント--お寿司の1カン" data-for="-コンポーネント--お寿司の1カン">🍣 コンポーネント → お寿司の1カン</a></li><li class="depth-2"><a href="#-uiライブラリ--寿司盛り合わせセット" data-for="-uiライブラリ--寿司盛り合わせセット">🍱 UIライブラリ → 寿司盛り合わせセット</a></li><li class="depth-0"><a href="#-ちゃんとした定義で比べてみよ" data-for="-ちゃんとした定義で比べてみよ">🧠 ちゃんとした定義で比べてみよ〜？</a></li><li class="depth-1"><a href="#-例で体感しよ" data-for="-例で体感しよ">🧪 例で体感しよ？</a></li><li class="depth-2"><a href="#-自作コンポーネント" data-for="-自作コンポーネント">🛠 自作コンポーネント：</a></li><li class="depth-2"><a href="#-uiライブラリから使う" data-for="-uiライブラリから使う">📦 UIライブラリから使う：</a></li><li class="depth-1"><a href="#-react的にまとめると" data-for="-react的にまとめると">🧱 React的にまとめると…</a></li><li class="depth-1"><a href="#-まとめ-2" data-for="-まとめ-2">💥 まとめ！</a></li><li class="depth-1"><a href="#-最後に-1" data-for="-最後に-1">💬 最後に♡</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>Backlinks</h3><ul id="list-2" class="overflow"><li><a href="../サイト構築/サイト構築" class="internal">サイト構築</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v4.5.2</a> © 2025</p><ul><li><a href="https://github.com/jackyzha0/quartz">GitHub</a></li><li><a href="https://discord.gg/cRFFHYye7t">Discord Community</a></li></ul></footer></div></div></body><script type="application/javascript">function n(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.getElementsByClassName("callout-content")[0];if(!e)return;let l=t.classList.contains("is-collapsed");e.style.gridTemplateRows=l?"0fr":"1fr"}function c(){let t=document.getElementsByClassName("callout is-collapsible");for(let e of t){let l=e.getElementsByClassName("callout-title")[0],s=e.getElementsByClassName("callout-content")[0];if(!l||!s)continue;l.addEventListener("click",n),window.addCleanup(()=>l.removeEventListener("click",n));let o=e.classList.contains("is-collapsed");s.style.gridTemplateRows=o?"0fr":"1fr"}}document.addEventListener("nav",c);
+</script><script type="module">function f(i,e){if(!i)return;function r(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function t(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}i?.addEventListener("click",r),window.addCleanup(()=>i?.removeEventListener("click",r)),document.addEventListener("keydown",t),window.addCleanup(()=>document.removeEventListener("keydown",t))}function y(i){for(;i.firstChild;)i.removeChild(i.firstChild)}var h=class{constructor(e,r){this.container=e;this.content=r;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),r=this.onMouseMove.bind(this),t=this.onMouseUp.bind(this),o=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",r),document.addEventListener("mouseup",t),window.addEventListener("resize",o),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",r),()=>document.removeEventListener("mouseup",t),()=>window.removeEventListener("resize",o))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let r=this.createButton("+",()=>this.zoom(.1)),t=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(t),e.appendChild(o),e.appendChild(r),this.container.appendChild(e)}createButton(e,r){let t=document.createElement("button");return t.textContent=e,t.className="mermaid-control-button",t.addEventListener("click",r),window.addCleanup(()=>t.removeEventListener("click",r)),t}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}zoom(e){let r=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),t=this.content.getBoundingClientRect(),o=t.width/2,n=t.height/2,c=r-this.scale;this.currentPan.x-=o*c,this.currentPan.y-=n*c,this.scale=r,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){this.scale=1;let e=this.content.querySelector("svg");this.currentPan={x:e.getBoundingClientRect().width/2,y:e.getBoundingClientRect().height/2},this.updateTransform()}},C=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],E;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;E||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let r=E.default,t=new WeakMap;for(let n of e)t.set(n,n.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let a=t.get(s);a&&(s.innerHTML=a)}let n=C.reduce((s,a)=>(s[a]=window.getComputedStyle(document.documentElement).getPropertyValue(a),s),{}),c=document.documentElement.getAttribute("saved-theme")==="dark";r.initialize({startOnLoad:!1,securityLevel:"loose",theme:c?"dark":"base",themeVariables:{fontFamily:n["--codeFont"],primaryColor:n["--light"],primaryTextColor:n["--darkgray"],primaryBorderColor:n["--tertiary"],lineColor:n["--darkgray"],secondaryColor:n["--secondary"],tertiaryColor:n["--tertiary"],clusterBkg:n["--light"],edgeLabelBackground:n["--highlight"]}}),await r.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let n=0;n<e.length;n++){let v=function(){let g=l.querySelector("#mermaid-space"),m=l.querySelector(".mermaid-content");if(!m)return;y(m);let w=c.querySelector("svg").cloneNode(!0);m.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new h(g,m)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},c=e[n],s=c.parentElement,a=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(a),L=a.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),f(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript"></script><script src="../postscript.js" type="module"></script></html>
